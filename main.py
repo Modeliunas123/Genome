@@ -2,7 +2,9 @@ import PySimpleGUI as Interface
 import re
 import InterfaceStuff
 import Dictionaries
+
 Interface.theme('PythonPlus')
+
 
 def DNA_AT_CG_content(DNA_sequence_raw):
     DNA_sequence = DNA_sequence_raw.upper()
@@ -29,9 +31,11 @@ def RNA_AU_CG_content(RNA_sequence_raw):
     else:
         AU_total = 100 * ((RNA_sequence.count("A") + RNA_sequence.count("U")) / len(RNA_sequence))
         CG_total = 100 * ((RNA_sequence.count("C") + RNA_sequence.count("G")) / len(RNA_sequence))
-        print("Total AT: ", round(AU_total, 2), "%\nTotal CG: ", round(CG_total, 2), "%\nDNA Length: ", len(RNA_sequence))
+        print("Total AT: ", round(AU_total, 2), "%\nTotal CG: ", round(CG_total, 2), "%\nDNA Length: ",
+              len(RNA_sequence))
 
-#_______________________________________________________________________________________________________________________
+
+# _______________________________________________________________________________________________________________________
 
 def DNA_to_amino_acid(DNA_sequence_raw):
     DNA_strand = DNA_sequence_raw.upper()
@@ -41,7 +45,8 @@ def DNA_to_amino_acid(DNA_sequence_raw):
         codon = DNA_strand[triplets:triplets + 3]
         amino_acid = Dictionaries.DNA_aa_triplet_dict.get(codon, "X")
         protein = protein + amino_acid
-    return(protein)
+    return protein
+
 
 def RNA_to_amino_acid(RNA_sequence_raw):
     RNA_strand = RNA_sequence_raw.upper()
@@ -51,9 +56,10 @@ def RNA_to_amino_acid(RNA_sequence_raw):
         codon = RNA_strand[triplets:triplets + 3]
         amino_acid = Dictionaries.RNA_aa_triplet_dict.get(codon, "X")
         protein = protein + amino_acid
-    return(protein)
+    return (protein)
 
-#_______________________________________________________________________________________________________________________
+
+# _______________________________________________________________________________________________________________________
 
 def molecular_weight_daltons(DNA_sequence_raw):
     DNA_strand = DNA_sequence_raw.upper()
@@ -64,9 +70,10 @@ def molecular_weight_daltons(DNA_sequence_raw):
         amino_acid = Dictionaries.DNA_aa_triplet_dict.get(triplet, "X")
         daltons = Dictionaries.daltons_dict.get(amino_acid, 100)
         molecular_weight_raw = (molecular_weight_raw + daltons) - 18.02
-    return(molecular_weight_raw + 18.02)
+    return (molecular_weight_raw + 18.02)
 
-#_______________________________________________________________________________________________________________________
+
+# _______________________________________________________________________________________________________________________
 
 def DNA_to_RNA_conversion(DNA_to_RNA_sequence_raw):
     DNA_to_RNA = DNA_to_RNA_sequence_raw.upper()
@@ -81,10 +88,11 @@ def DNA_to_RNA_conversion(DNA_to_RNA_sequence_raw):
         DNA_RNA_converted = DNA_RNA.upper()
         print("Your RNA sequence is: " + "\n" + DNA_RNA_converted)
 
-#_______________________________________________________________________________________________________________________
+
+# _______________________________________________________________________________________________________________________
 
 
-#-------------------------------------------MAIN CODE-------------------------------------------------------------------
+# -------------------------------------------MAIN CODE-------------------------------------------------------------------
 
 def main():
     window = InterfaceStuff.main_window()
@@ -92,14 +100,16 @@ def main():
         event, values = window.read()
         if event == Interface.WIN_CLOSED or event == 'Exit':
             break
-# -------------------------------------------DNA  CODING INTERFACE------------------------------------------------------
+        # -------------------------------------------DNA  CODING INTERFACE------------------------------------------------------
         elif event == 'DNA':
+            print(1)
             window.close()
             window = InterfaceStuff.DNA_window()
             event, values = window.read()
             if event == Interface.WIN_CLOSED or event == 'Exit':
                 break
             elif event == 'Amino acid converter':
+                print(2)
                 window.close()
                 window = InterfaceStuff.DNA_amino_acid_window()
                 event, values = window.read()
@@ -111,6 +121,7 @@ def main():
                     window.close()
                     window = InterfaceStuff.main_window()
             elif event == 'AT/CG calculator':
+                print(3)
                 window.close()
                 window = InterfaceStuff.DNA_ATCG_calculator()
                 event, values = window.read()
@@ -123,18 +134,21 @@ def main():
                     window.close()
                     window = InterfaceStuff.main_window()
             elif event == 'Back':
+                print(4)
                 window.close()
                 window = InterfaceStuff.main_window()
 
-# -------------------------------------------RNA  CODING INTERFACE------------------------------------------------------
+        # -------------------------------------------RNA  CODING INTERFACE------------------------------------------------------
 
         elif event == 'RNA':
+            print(5)
             window.close()
             window = InterfaceStuff.RNA_window()
             event, values = window.read()
             if event == Interface.WIN_CLOSED or event == 'Exit':
                 break
             elif event == 'Amino acid converter':
+                print(6)
                 window.close()
                 window = InterfaceStuff.RNA_amino_acid_window()
                 event, values = window.read()
@@ -146,6 +160,7 @@ def main():
                     window.close()
                     window = InterfaceStuff.main_window()
             elif event == 'AU/CG calculator':
+                print(7)
                 window.close()
                 window = InterfaceStuff.RNA_AUCG_calculator()
                 event, values = window.read()
@@ -157,18 +172,21 @@ def main():
                     window.close()
                     window = InterfaceStuff.main_window()
             elif event == 'Back':
+                print(8)
                 window.close()
                 window = InterfaceStuff.main_window()
 
-# -------------------------------------------CONVERSION CODING INTERFACE------------------------------------------------
+        # -------------------------------------------CONVERSION CODING INTERFACE------------------------------------------------
 
         elif event == 'Strand Conversion':
+            print(9)
             window.close()
             window = InterfaceStuff.DNA_and_RNA_window()
             event, values = window.read()
             if event == Interface.WIN_CLOSED or event == 'Exit':
                 break
             elif event == 'DNA -> RNA':
+                print(10)
                 window.close()
                 window = InterfaceStuff.DNA_to_RNA_window()
                 event, values = window.read()
@@ -180,6 +198,7 @@ def main():
                     window.close()
                     window = InterfaceStuff.main_window()
             elif event == 'RNA -> DNA':
+                print(11)
                 window.close()
                 window = InterfaceStuff.RNA_to_DNA_window()
                 event, values = window.read()
@@ -193,5 +212,7 @@ def main():
             elif event == 'Back':
                 window.close()
                 window = InterfaceStuff.main_window()
-#-----------------------------------------------------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------------------------------------------------------
 main()
