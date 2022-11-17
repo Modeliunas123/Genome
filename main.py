@@ -1,7 +1,7 @@
 import PySimpleGUI as Interface
 import re
 import InterfaceStuff
-import Dictionaries as dict
+import Dictionaries
 Interface.theme('PythonPlus')
 
 def DNA_AT_CG_content(DNA_sequence_raw):
@@ -39,7 +39,7 @@ def DNA_to_amino_acid(DNA_sequence_raw):
     protein = " "
     for triplets in range(0, total_length, 3):
         codon = DNA_strand[triplets:triplets + 3]
-        amino_acid = dict.DNA_aa_triplet_dict.get(codon, "X")
+        amino_acid = Dictionaries.DNA_aa_triplet_dict.get(codon, "X")
         protein = protein + amino_acid
     return(protein)
 
@@ -49,7 +49,7 @@ def RNA_to_amino_acid(RNA_sequence_raw):
     protein = " "
     for triplets in range(0, total_length, 3):
         codon = RNA_strand[triplets:triplets + 3]
-        amino_acid = dict.RNA_aa_triplet_dict.get(codon, "X")
+        amino_acid = Dictionaries.RNA_aa_triplet_dict.get(codon, "X")
         protein = protein + amino_acid
     return(protein)
 
@@ -61,8 +61,8 @@ def molecular_weight_daltons(DNA_sequence_raw):
     molecular_weight_raw = 0
     for nucleotide in range(0, DNA_length, 3):
         triplet = DNA_strand[nucleotide:nucleotide + 3]
-        amino_acid = dict.DNA_aa_triplet_dict.get(triplet, "X")
-        daltons = dict.daltons_dict.get(amino_acid, 100)
+        amino_acid = Dictionaries.DNA_aa_triplet_dict.get(triplet, "X")
+        daltons = Dictionaries.daltons_dict.get(amino_acid, 100)
         molecular_weight_raw = (molecular_weight_raw + daltons) - 18.02
     return(molecular_weight_raw + 18.02)
 
