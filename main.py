@@ -1,79 +1,8 @@
 import PySimpleGUI as Interface
 import re
 import InterfaceStuff
+import Dictionaries as dict
 Interface.theme('PythonPlus')
-#______________________________________________DICTIONARIES_____________________________________________________________
-DNA_aa_triplet_dict = {
-    "AAA": "F", "AAG": "F",
-    "AAT": "L", "AAC": "L", "GAA": "L", "GAG": "L", "GAT": "L", "GAC": "L",
-    "AGA": "S", "AGG": "S", "AGT": "S", "AGC": "S", "TCA": "S", "TCG": "S",
-    "GGA": "P", "GGG": "P", "GGT": "P", "GGC": "P",
-    "TAA": "I", "TAG": "I", "TAT": "I",
-    "TAC": "M",
-    "TGA": "T", "TGG": "T", "TGT": "T", "TGC": "T",
-    "CAA": "V", "CAG": "V", "CAT": "V", "CAC": "V",
-    "CGA": "A", "CGG": "A", "CGT": "A", "CGC": "A",
-    "ACA": "C", "ACG": "C",
-    "ACC": "W",
-    "ATA": "Y", "ATG": "Y",
-    "ATT": "STOP", "ATC": "STOP", "ACT": "STOP",
-    "GCA": "R", "GCG": "R", "GCT": "R", "GCC": "R", "TCT": "R", "TCC": "R",
-    "GTA": "H", "GTG": "H",
-    "GTT": "Q", "GTC": "Q",
-    "TTA": "N", "TTG": "N",
-    "TTT": "K", "TTC": "K",
-    "CCA": "G", "CCG": "G", "CCT": "G", "CCC": "G",
-    "CTA": "D", "CTG": "D",
-    "CTT": "E", "CTC": "E"
-}
-#_______________________________________________________________________________________________________________________
-RNA_aa_triplet_dict = {
-    "UUU": "F", "UUC": "F",
-    "UUA": "L", "UUG": "L", "CUU": "L", "CUC": "L", "CUA": "L", "CUG": "L",
-    "UCU": "S", "UCC": "S", "UCA": "S", "UCG": "S", "AGU": "S", "AGC": "S",
-    "CCU": "P", "CCC": "S", "CCA": "S", "CCG": "S",
-    "I": ["AUU", "AUC", "AUA"],
-    "M": "AUG",
-    "ACU": "T", "ACC": "T", "ACA": "T", "ACG": "T",
-    "GUU": "V", "GUC": "V", "GUA": "V", "GUG": "V",
-    "GCU": "A", "GCC": "A", "GCA": "A", "GCG": "A",
-    "UGU": "C", "UGC": "C",
-    "UGG": "W",
-    "UAU": "Y", "UAC": "Y",
-    "UAA": "!STOP!", "UAG": "!STOP!", "UGA": "!STOP!",
-    "CGU": "R", "CGC": "R", "CGA": "R", "CGG": "R", "AGA": "R", "AGG": "R",
-    "CAU": "H", "CAC": "H",
-    "CAA": "Q", "CAG": "Q",
-    "AAU": "N", "AAC": "N",
-    "AAA": "K", "AAG": "K",
-    "GGU": "G", "GGC": "G", "GGA": "G", "GGG": "G",
-    "GAU": "D", "GAC": "D",
-    "GAA": "E", "GAG": "E"
-}
-#_______________________________________________________________________________________________________________________
-daltons_dict = {
-    "A": 71.08,
-    "R": 156.2,
-    "N": 114.11,
-    "D": 115.09,
-    "C": 103.14,
-    "Q": 128.14,
-    "E": 129.12,
-    "G": 57.06,
-    "H": 137.15,
-    "I": 113.17,
-    "L": 113.17,
-    "K": 128.18,
-    "M": 131.21,
-    "F": 147.18,
-    "P": 97.12,
-    "S": 87.08,
-    "T": 101.11,
-    "W": 186.21,
-    "Y": 163.18,
-    "V": 99.14,
-    "H2O": 18.02,
-}
 
 def DNA_AT_CG_content(DNA_sequence_raw):
     DNA_sequence = DNA_sequence_raw.upper()
@@ -87,7 +16,6 @@ def DNA_AT_CG_content(DNA_sequence_raw):
         AT_total = round(100 * ((DNA_sequence.count("A") + DNA_sequence.count("T")) / len(DNA_sequence)), 2)
         CG_total = round(100 * ((DNA_sequence.count("C") + DNA_sequence.count("G")) / len(DNA_sequence)), 2)
         print("Total AT: ", AT_total, "%\nTotal CG: ", CG_total, "%\nDNA Length: ", len(DNA_sequence))
-
 
 
 def RNA_AU_CG_content(RNA_sequence_raw):
@@ -111,7 +39,7 @@ def DNA_to_amino_acid(DNA_sequence_raw):
     protein = " "
     for triplets in range(0, total_length, 3):
         codon = DNA_strand[triplets:triplets + 3]
-        amino_acid = DNA_aa_triplet_dict.get(codon, "X")
+        amino_acid = dict.DNA_aa_triplet_dict.get(codon, "X")
         protein = protein + amino_acid
     return(protein)
 
@@ -121,7 +49,7 @@ def RNA_to_amino_acid(RNA_sequence_raw):
     protein = " "
     for triplets in range(0, total_length, 3):
         codon = RNA_strand[triplets:triplets + 3]
-        amino_acid = RNA_aa_triplet_dict.get(codon, "X")
+        amino_acid = dict.RNA_aa_triplet_dict.get(codon, "X")
         protein = protein + amino_acid
     return(protein)
 
@@ -133,8 +61,8 @@ def molecular_weight_daltons(DNA_sequence_raw):
     molecular_weight_raw = 0
     for nucleotide in range(0, DNA_length, 3):
         triplet = DNA_strand[nucleotide:nucleotide + 3]
-        amino_acid = DNA_aa_triplet_dict.get(triplet, "X")
-        daltons = daltons_dict.get(amino_acid, 100)
+        amino_acid = dict.DNA_aa_triplet_dict.get(triplet, "X")
+        daltons = dict.daltons_dict.get(amino_acid, 100)
         molecular_weight_raw = (molecular_weight_raw + daltons) - 18.02
     return(molecular_weight_raw + 18.02)
 
