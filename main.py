@@ -1,6 +1,6 @@
 import PySimpleGUI as Interface
 import re
-import Interface
+import Interface_Layout
 import Dictionaries as dict
 
 Interface.theme('PythonPlus')
@@ -168,7 +168,7 @@ def RNA_to_DNA_conversion(RNA_to_DNA_sequence_raw):
 # -------------------------------------------MAIN CODE-------------------------------------------------------------------
 
 def main():
-    window = InterfaceStuff.main_window()
+    window = Interface_Layout.main_window()
     while True:
         event, values = window.read()
         if event == Interface.WIN_CLOSED or event == 'Exit':
@@ -177,14 +177,14 @@ def main():
         elif event == 'DNA':
 
             window.close()
-            window = InterfaceStuff.DNA_window()
+            window = Interface_Layout.DNA_window()
             event, values = window.read()
             if event == Interface.WIN_CLOSED or event == 'Exit':
                 break
 
             elif event == 'Amino Acid Converter':
                 window.close()
-                window = InterfaceStuff.DNA_amino_acid_window()
+                window = Interface_Layout.DNA_amino_acid_window()
                 event, values = window.read()
                 if event == Interface.WIN_CLOSED or event == 'Exit':
                     break
@@ -197,14 +197,14 @@ def main():
                         break
                     elif event == 'Main Menu':
                         window.close()
-                        window = InterfaceStuff.main_window()
+                        window = Interface_Layout.main_window()
                 elif event == 'Main Menu':
                     window.close()
-                    window = InterfaceStuff.main_window()
+                    window = Interface_Layout.main_window()
 
             elif event == 'AT/CG Calculator':
                 window.close()
-                window = InterfaceStuff.DNA_ATCG_calculator()
+                window = Interface_Layout.DNA_ATCG_calculator()
                 event, values = window.read()
                 if event == Interface.WIN_CLOSED or event == 'Exit':
                     break
@@ -217,14 +217,14 @@ def main():
                         break
                     elif event == 'Main Menu':
                         window.close()
-                        window = InterfaceStuff.main_window()
+                        window = Interface_Layout.main_window()
                 elif event == 'Main Menu':
                     window.close()
-                    window = InterfaceStuff.main_window()
+                    window = Interface_Layout.main_window()
 
             elif event == 'Molecular Weight':
                 window.close()
-                window = InterfaceStuff.DNA_molecular_weight()
+                window = Interface_Layout.DNA_molecular_weight()
                 event, values = window.read()
                 if event == Interface.WIN_CLOSED or event == 'Exit':
                     break
@@ -237,28 +237,28 @@ def main():
                         break
                     elif event == 'Main Menu':
                         window.close()
-                        window = InterfaceStuff.main_window()
+                        window = Interface_Layout.main_window()
                 elif event == 'Main Menu':
                     window.close()
-                    window = InterfaceStuff.main_window()
+                    window = Interface_Layout.main_window()
 
             elif event == 'Back':
                 window.close()
-                window = InterfaceStuff.main_window()
+                window = Interface_Layout.main_window()
 
 
         # -------------------------------------------RNA  CODING INTERFACE------------------------------------------------------
 
         elif event == 'RNA':
             window.close()
-            window = InterfaceStuff.RNA_window()
+            window = Interface_Layout.RNA_window()
             event, values = window.read()
             if event == Interface.WIN_CLOSED or event == 'Exit':
                 break
 
             elif event == 'Amino Acid Converter':
                 window.close()
-                window = InterfaceStuff.RNA_amino_acid_window()
+                window = Interface_Layout.RNA_amino_acid_window()
                 event, values = window.read()
                 if event == Interface.WIN_CLOSED or event == 'Exit':
                     break
@@ -271,14 +271,14 @@ def main():
                         break
                     elif event == 'Main Menu':
                         window.close()
-                        window = InterfaceStuff.main_window()
+                        window = Interface_Layout.main_window()
                 elif event == 'Main Menu':
                     window.close()
-                    window = InterfaceStuff.main_window()
+                    window = Interface_Layout.main_window()
 
             elif event == 'AU/CG Calculator':
                 window.close()
-                window = InterfaceStuff.RNA_AUCG_calculator()
+                window = Interface_Layout.RNA_AUCG_calculator()
                 event, values = window.read()
                 if event == Interface.WIN_CLOSED or event == 'Exit':
                     break
@@ -291,14 +291,14 @@ def main():
                         break
                     elif event == 'Main Menu':
                         window.close()
-                        window = InterfaceStuff.main_window()
+                        window = Interface_Layout.main_window()
                 elif event == 'Main Menu':
                     window.close()
-                    window = InterfaceStuff.main_window()
+                    window = Interface_Layout.main_window()
 
             elif event == 'Molecular Weight':
                 window.close()
-                window = InterfaceStuff.RNA_molecular_weight()
+                window = Interface_Layout.RNA_molecular_weight()
                 event, values = window.read()
                 if event == Interface.WIN_CLOSED or event == 'Exit':
                     break
@@ -311,27 +311,27 @@ def main():
                         break
                     elif event == 'Main Menu':
                         window.close()
-                        window = InterfaceStuff.main_window()
+                        window = Interface_Layout.main_window()
                 elif event == 'Main Menu':
                     window.close()
-                    window = InterfaceStuff.main_window()
+                    window = Interface_Layout.main_window()
 
             elif event == 'Back':
                 window.close()
-                window = InterfaceStuff.main_window()
+                window = Interface_Layout.main_window()
 
         # -------------------------------------------CONVERSION CODING INTERFACE------------------------------------------------
 
         elif event == 'Strand Conversion':
 
             window.close()
-            window = InterfaceStuff.DNA_and_RNA_window()
+            window = Interface_Layout.DNA_and_RNA_window()
             event, values = window.read()
             if event == Interface.WIN_CLOSED or event == 'Exit':
                 break
             elif event == 'DNA -> RNA':
                 window.close()
-                window = InterfaceStuff.DNA_to_RNA_window()
+                window = Interface_Layout.DNA_to_RNA_window()
                 event, values = window.read()
                 if event == Interface.WIN_CLOSED or event == 'Exit':
                     break
@@ -344,14 +344,14 @@ def main():
                         break
                     elif event == 'Main Menu':
                         window.close()
-                        window = InterfaceStuff.main_window()
+                        window = Interface_Layout.main_window()
                 elif event == 'Main Menu':
                     window.close()
-                    window = InterfaceStuff.main_window()
+                    window = Interface_Layout.main_window()
 
             elif event == 'RNA -> DNA':
                 window.close()
-                window = InterfaceStuff.RNA_to_DNA_window()
+                window = Interface_Layout.RNA_to_DNA_window()
                 event, values = window.read()
                 if event == Interface.WIN_CLOSED or event == 'Exit':
                     break
@@ -364,14 +364,15 @@ def main():
                         break
                     elif event == 'Main Menu':
                         window.close()
-                        window = InterfaceStuff.main_window()
+                        window = Interface_Layout.main_window()
                 elif event == 'Main Menu':
                     window.close()
-                    window = InterfaceStuff.main_window()
+                    window = Interface_Layout.main_window()
             elif event == 'Back':
                 window.close()
-                window = InterfaceStuff.main_window()
+                window = Interface_Layout.main_window()
 
 # -----------------------------------------------------------------------------------------------------------------------
 
 main()
+
