@@ -1,6 +1,6 @@
 import PySimpleGUI as Interface
 import re
-import InterfaceStuff
+import Interface
 import Dictionaries as dict
 
 Interface.theme('PythonPlus')
